@@ -9,6 +9,11 @@ try{
 	stage('Maven Build'){
 		sh 'mvn clean package'
 	}
+	  stage('Email Notification'){
+      mail bcc: '', body: '''Hi Welcome to jenkins email alerts
+      Thanks
+      Dhaval''', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'piyukadam107@gmail.com'
+   }
 	stage('Deploy to Dev'){
 		sh 'mv target/*.war target/myweb.war'
 		sshagent(['tomcat-dev']) {
